@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public bool isPlayer1 = true;
+
     [Header("Movement")]
     public float speed = 10.0f;
 
@@ -26,9 +26,18 @@ public class Player : MonoBehaviour
     void Update()
     {
         var input = new Vector3();
-        input.x = Input.GetAxis("Horizontal");
-        input.z = Input.GetAxis("Vertical");
 
+        if(isPlayer1)
+        {
+            input.x = Input.GetAxis("HorizontalKeys");
+            input.z = Input.GetAxis("VerticalKeys");
+        }
+        else
+        {
+            input.x = Input.GetAxis("HorizontalArrows");
+            input.z = Input.GetAxis("VerticalArrows");
+        }
+        
         transform.position += input * speed * Time.deltaTime;
 
         if(input != Vector3.zero)
