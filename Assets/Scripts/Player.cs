@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public bool player1 = true;
+
     [Header("Movement")]
     public float speed = 10f;
 
@@ -11,6 +13,10 @@ public class Player : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     public float fireRate = 0.5f;
+
+    [Header("Health")]
+    public Health health;
+
 
     void Start()
     {
@@ -27,13 +33,32 @@ public class Player : MonoBehaviour
     void Update()
     {
         var input = new Vector3();
-        input.x = Input.GetAxis("Horizontal");
-        //input.y = transform.position.y;
-        input.z = Input.GetAxis("Vertical");
+
+        if(player1)
+        {
+            input.x = Input.GetAxis("HorizontalKeys");
+            //input.y = transform.position.y;
+            input.z = Input.GetAxis("VerticalKeys");
+        }
+        else
+        {
+            input.x = Input.GetAxis("HorizontalArrows");
+            //input.y = transform.position.y;
+            input.z = Input.GetAxis("VerticalArrows");
+        }
+        
 
         transform.position += input * speed * Time.deltaTime;
 
         if (input != Vector3.zero)
             transform.forward = input;
+    }
+
+    private void OnCollisionEnter(Collision other) 
+    {
+        if(other.gameObject.CompareTag("Bullet"))
+        {
+            health.TakeDamage(Bullet.damage);
+        }
     }
 }
