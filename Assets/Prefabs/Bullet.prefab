@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96d3ae28a2fc3d644bae3dde6c4680bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 5077085609186274325, guid: d9c8a96a87b3c9b4fb89937dca70900d, type: 3}
   Distance: 2
 --- !u!1001 &3083037182824833659
 PrefabInstance:

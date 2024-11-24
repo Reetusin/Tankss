@@ -9,6 +9,11 @@ public class Player : MonoBehaviour
     public AudioClip shooot;
     private AudioSource audioSource;
 
+    [Header("Sound")]
+
+    public float onVolume = 0.5f;
+    public float offVolume = 0.0f;
+
     [Header("Movement")]
     public float speed = 10.0f;
 
@@ -50,7 +55,15 @@ public class Player : MonoBehaviour
         }
         transform.position += input * speed * Time.deltaTime;
         if (input != Vector3.zero)
-                transform.forward = input;
+        {
+            transform.forward = input;
+            audioSource.volume = onVolume;
+        }
+        else
+        {
+            audioSource.volume = offVolume;
+        }
+                
 
     }
 }
